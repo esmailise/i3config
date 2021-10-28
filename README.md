@@ -1,6 +1,6 @@
 # i3config
-for use my config i3 browny you need copy config file to path: <code> ~/.config/i3/</code>
-<br />and for i3 bar copy i3status.conf file to path: <code>/etc/</code>
+for use my config i3 browny you need copy config file to path: <code> cp config ~/.config/i3/</code>
+<br />and for i3 bar copy i3status.conf file to path: <code>sudo cp i3status.conf /etc/</code>
 
 dependencies:
 1. i3
