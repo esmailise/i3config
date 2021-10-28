@@ -10,5 +10,5 @@ dependencies:
 5. feh
 6. rofi
 7. rofi-calc
-   
+
 also you need to change some setting code to your system like (cpu temp) in i3status.conf or (desktop rander) and ...
