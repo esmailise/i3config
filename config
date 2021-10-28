@@ -1,0 +1,336 @@
+# Please see https://i3wm.org/docs/userguide.html for a complete reference!
+
+set $mod Mod4
+
+# Font for window titles. Will also be used by the bar unless a different font
+# is used in the bar {} block below.
+font pango:monospace 8
+
+# This font is widely installed, provides lots of unicode glyphs, right-to-left
+# text rendering and scalability on retina/hidpi displays (thanks to pango).
+#font pango:DejaVu Sans Mono 8
+
+# xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
+# screen before suspend. Use loginctl lock-session to lock your screen.
+exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
+
+# NetworkManager is the most popular way to manage wireless networks on Linux,
+# and nm-applet is a desktop environment-independent system tray GUI for it.
+exec --no-startup-id nm-applet
+exec picom -b
+#exec xwinwrap -ov -ni -fs -- mpv -wid WID --keepaspect=no --no-audio --loop ~/Videos/video.mp4
+
+
+
+#================================================================
+#=========== Use Pactl To Adjust Volume In PulseAudio ===========
+#================================================================
+
+bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +1% 
+bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -1%
+
+#<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+#>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#>>>>>>>>>>>>>> Bind For control Windows i3 >>>>>>>>>>>>>>
+#>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# start a terminal
+bindsym $mod+Return exec termite
+
+# Turn on Led
+bindsym $mod+j exec xset led
+bindsym $mod+k exec xset -led
+
+# kill focused window
+bindsym $mod+Shift+q kill
+
+# start dmenu (a program launcher)
+#bindsym $mod+d exec dmenu_run
+bindsym $mod+d exec rofi -show drun -show-icons -lines 6 -width 36
+bindsym $mod+g exec rofi -show run  -lines 6 -width 36
+
+
+#rofi-calc
+bindsym $mod+c exec rofi -show calc -modi calc -no-show-match -no-sort
+
+#rofi-windows
+bindsym $mod+Shift+w exec rofi -show
+
+# There also is the (new) i3-dmenu-desktop which only displays applications
+# shipping a .desktop file. It is a wrapper around dmenu, so you need that
+# installed.
+# bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# split in horizontal orientation
+bindsym $mod+h split h
+
+# split in vertical orientation
+bindsym $mod+v split v
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# focus the parent container
+bindsym $mod+a focus parent
+
+# focus the child container
+#bindsym $mod+d focus child
+
+#border windows
+default_border none
+default_floating_border none
+
+#Screanshot
+bindsym Print exec gnome-screenshot $HOME/user/Pictures/'date +%Y-%m-%d_%H:%M:%S'.png
+
+
+#<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+#======================================
+#=========== Workspace Name ===========
+#======================================
+
+set $ws1 1:I: 
+set $ws2 2:II: 
+set $ws3 3:III: 
+set $ws4 4:IV: 
+set $ws5 5:V: 
+set $ws6 6:VI: 
+set $ws7 7:VII: 
+set $ws8 8:VIII: 
+set $ws9 9:IX: 
+set $ws10 "10"
+
+#<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+#===========================================
+#=========== Switch To Workspace ===========
+#===========================================
+
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+bindsym $mod+7 workspace $ws7
+bindsym $mod+8 workspace $ws8
+bindsym $mod+9 workspace $ws9
+bindsym $mod+0 workspace $ws10
+
+#<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+#===========================================================
+#=========== Move Focused Container To Workspace ===========
+#===========================================================
+
+bindsym $mod+Shift+1 move container to workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4
+bindsym $mod+Shift+5 move container to workspace $ws5
+bindsym $mod+Shift+6 move container to workspace $ws6
+bindsym $mod+Shift+7 move container to workspace $ws7
+bindsym $mod+Shift+8 move container to workspace $ws8
+bindsym $mod+Shift+9 move container to workspace $ws9
+bindsym $mod+Shift+0 move container to workspace $ws10
+
+#<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+#=====================================================
+#=========== Assign Programs To Workspaces ===========
+#=====================================================
+
+assign [class="firefox"] $ws3
+assign [class="Termite"] $ws2
+assign [class="TelegramDesktop"] $ws4
+assign [class="Totem"] $ws5
+assign [class="Rhythmbox"] $ws5
+assign [class="Rhythmbox"] $ws5
+assign [class="minecraft-launcher"] $ws6
+assign [class="discord"] $ws4
+assign [class="Skype"] $ws4
+assign [class="obs"] $ws8
+assign [class="Element"] $ws4
+assign [class="Vmware"] $ws7
+for_window [class="Spotify"] move to workspace $ws9
+ 
+#<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+#==================================================
+#================= Resize Windows ================= 
+#==================================================
+
+mode "resize" {
+        # These bindings trigger as soon as you enter the resize mode
+
+        # same bindings, but for the arrow keys
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+
+        # back to normal: Enter or Escape or $mod+r
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+        bindsym $mod+r mode "default"
+}
+
+bindsym $mod+r mode "resize"
+
+#<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+#=====================================
+#=========== Colors ===========
+#=====================================
+
+set $bg-color 	         #6c4131
+set $inactive-bg-color   #2f343f
+set $text-color          #f3f4f5
+set $inactive-text-color #676E7D
+set $urgent-bg-color     #E53935
+
+#<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+#=====================================
+#=========== Window Color ===========
+#=====================================
+
+#                       border              background         text                 indicator
+client.focused          #787564             #787564            $text-color          #787564
+client.unfocused        #3a3a3a	            #3a3a3a            $inactive-text-color #3a3a3a
+client.focused_inactive #3a3a3a	            #3a3a3a	       $inactive-text-color #3a3a3a
+client.urgent           #454545             #454545            $text-color          #6c4131
+hide_edge_borders both
+
+#<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+#==============================
+#=========== I3 Bar ===========
+#==============================
+
+bar {
+
+	font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
+	font pango:DejaVu Sans 10.7
+	strip_workspace_numbers yes	    	    
+
+	#separator_symbol ""
+	separator_symbol "•"
+	status_command i3status
+
+	colors {
+
+		background #232323
+		separator #757575
+		#separator #636dc8
+		#                  border             background         text
+		focused_workspace  #6c4131            #6c4131            $text-color
+		inactive_workspace #232323            #232323            $inactive-text-color
+		urgent_workspace   #454545            #454545            $text-color
+	}
+
+	position top
+}
+
+#<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+#===========================================
+#================= i3 gaps =================
+#===========================================
+
+for_window [class="^.*"] border pixel 3
+gaps inner 12
+gaps outer 12
+#smart_gaps on
+#smart_borders on
+
+#<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+#======================================
+#=========== I3 Bind system ===========
+#======================================
+
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+
+# exit i3 (logs you out of your X session)
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+
+#Mouse Setting Select
+focus_follows_mouse no
+
+#<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+#======================================
+#=========== Desktop Manage ===========
+#======================================
+
+#lock screen
+bindsym $mod+shift+x exec i3lock --color "$bg-color"
+
+#wallpaper
+exec_always feh --bg-scale /home/user/Pictures/Wallpapers/paper.jpg
+
+#Desktop Randr
+exec_always xrandr --output DVI-D-0 --off --output HDMI-0 --off --output HDMI-1 --mode 1920x1080 --pos 0x0 --rotate normal --output DP-0 --off --output DP-1 --off --output DP-2 --off --output DP-3 --off
+
+#<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+#==================================
+#=========== Other Bind ===========
+#==================================
+
+bindsym $mod+F2 exec firefox
+
+bindsym $mod+F1 exec Thunar
+
+#languge leyaout
+exec_always setxkbmap -layout us,ir -option "grp:alt_shift_toggle"
+
+#<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+
